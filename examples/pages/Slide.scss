@@ -1,0 +1,24 @@
+.item {
+  text-align: center;
+
+  h4 {
+    background: #2b2d32;
+    line-height: 40px;
+    color: #fff;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    height: 320px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    img {
+      max-height: 320px;
+      max-width: 100%;
+    }
+  }
+}

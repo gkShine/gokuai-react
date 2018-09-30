@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M24,8.47826087 L24,28.0434783 C24,29.1240354 23.1045695,30 22,30 L2,30 C0.8954305,30 0,29.1240354 0,28.0434783 L0,1.95652174 C0,0.87596462 0.8954305,0 2,0 L15.3333333,0" id="path-1"></path>
+    </defs>
+    <g id="Artboard-2" stroke="none" stroke-width="1" fill="white" fill-rule="evenodd">
+        <g id="Group-Copy-37" transform="translate(4.000000, 1.000000)">
+            <g id="Rectangle-2">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <path stroke="#5EA9F9" stroke-width="0.5" d="M23.75,8.58342719 L15.2313855,0.25 L2,0.25 C1.03228681,0.25 0.25,1.01528058 0.25,1.95652174 L0.25,28.0434783 C0.25,28.9847194 1.03228681,29.75 2,29.75 L22,29.75 C22.9677132,29.75 23.75,28.9847194 23.75,28.0434783 L23.75,8.58342719 Z"></path>
+                <rect fill="#5EA9F9" fill-rule="nonzero" mask="url(#mask-2)" x="15" y="-5" width="14" height="14" rx="1.92"></rect>
+            </g>
+            <g id="Group-6" transform="translate(3.000000, 14.000000)" fill="#5EA9F9" fill-rule="nonzero">
+                <rect id="Rectangle-2" x="0" y="0" width="13" height="2" rx="1"></rect>
+                <rect id="Rectangle-2-Copy" x="0" y="4.5" width="16" height="2" rx="1"></rect>
+                <rect id="Rectangle-2-Copy-2" x="0" y="9" width="10" height="2" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
