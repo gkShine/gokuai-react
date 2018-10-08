@@ -143,7 +143,7 @@ class Finder extends React.Component {
                       <GkButton size="mini">下载</GkButton>
                     </GkButton.Group>
                   }
-        />
+        ><div>测试控控空</div></GkFinder>
       </div>
     </div>)
   }

@@ -153,6 +153,9 @@ class Uploader extends React.Component {
   }
 
   webUpload = (picker) => {
+    document.querySelector(picker.id).addEventListener('mouseenter', () => {
+      this.uploader.refresh();
+    });
     if (this.uploader !== undefined) {
       this.uploader.addButton(picker);
       return this.uploader;

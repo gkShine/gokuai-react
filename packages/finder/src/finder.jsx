@@ -204,6 +204,7 @@ class Finder extends React.Component {
   renderListGrid() {
     return <Thumbnail {...this.publicProps} border={0} checkbox={this.props.checkbox} data={this.props.list}
                       defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}
+                      empty={<div className="gk-finder-empty">{this.props.children}</div>}
                       render={(file) =>
                         <React.Fragment>
                           <p><Fileicon thumbnail={file.thumbnail} filename={file.filename} size="128"
@@ -215,6 +216,7 @@ class Finder extends React.Component {
 
   renderList() {
     return <Table {...this.publicProps} header data={this.props.list} itemHeight={this.props.itemHeight}
+                  empty={<div className="gk-finder-empty">{this.props.children}</div>}
                   defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}>
       <Table.Column checkbox={this.props.checkbox} width={25} align="center"/>
       <Table.Column property="filename" label={this.gettext('filename')} render={(file) =>
@@ -232,7 +234,8 @@ class Finder extends React.Component {
 
   renderListDetail() {
     return <Table {...this.publicProps} data={this.props.list} itemHeight={this.props.itemHeight + 20}
-                  defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}>
+                  defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}
+                  empty={<div className="gk-finder-empty">{this.props.children}</div>}>
       <Table.Column width={25} checkbox={this.props.checkbox} align="center"/>
       <Table.Column property="filename" label="gettext('filename')" render={(file) =>
         <div className="gk-finder-filename-column">

@@ -4,20 +4,21 @@ import classnames from 'classnames';
 import tableMixin from '../../table/src/table-mixin';
 import ThumbnailItem from './thumbnail-item';
 import Loading from '../../loading';
-import ScrollLoad from "../../scroll-load/src/scroll-load";
+import ScrollLoad from '../../scroll-load';
 
 class Thumbnail extends React.Component {
   render() {
     const classList = classnames({
-      'gk-thumbnail': true,
+      'gk-thumbnail-fit': this.props.fit,
+      'gk-thumbnail-list': true,
       'gk-scrollbar': true,
       [this.props.className]: !!this.props.className,
-      'gk-thumbnail-fit': this.props.fit,
       'gk-thumbnail-checkbox': this.props.showCheckbox
     });
-    if (this.props.data.length) {
 
-      return (
+    return (
+      <section className="gk-thumbnail">
+        {this.props.data.length > 0 &&
         <React.Fragment>
           <Loading loading={this.props.loading}>
             <ScrollLoad onScroll={this.props.$handleLoadMore}>
@@ -50,11 +51,13 @@ class Thumbnail extends React.Component {
               <span className="gk-thumbnail-more-text">{this.props.moreText}</span>
             </div>
           }
-        </React.Fragment>
-      )
-    } else {
-      return (<div className="gk-thumbnail-empty" style={this.props.$style}>{this.props.empty}</div>);
-    }
+        </React.Fragment> ||
+        <div className={classnames({'gk-thumbnail-fit': this.props.fit})}>
+          <div className="gk-thumbnail-empty" style={this.props.$style}>{this.props.empty}</div>
+        </div>
+        }
+      </section>
+    );
   }
 }
 
