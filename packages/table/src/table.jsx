@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import tableMixin from './table-mixin';
 import TableCell from './table-cell';
 import Loading from '../../loading';
+import ScrollLoad from '../../scroll-load/';
 
 class Table extends React.Component {
   constructor(props) {
@@ -15,11 +16,11 @@ class Table extends React.Component {
   }
 
   setScrollbar() {
+    const table = document.querySelector('.gk-table-virtual');
     if (!this.props.header || !table) {
       return false;
     }
     this.inset = true;
-    const table = document.querySelector('.gk-table-virtual');
     const height = table ? table.clientHeight : this.props.height;
     this.setState({
       scrollbar: this.props.itemHeight * this.props.data.length > height
@@ -94,43 +95,45 @@ class Table extends React.Component {
               }
 
               <Loading loading={this.props.loading}>
-              <div className="gk-table-virtual gk-scrollbar"
-                   style={this.props.$style}
-                   onContextMenu={event => this.props.$handleContextMenu(null, null, event)}
-                   onClick={this.props.$handleCancelSelect}
-              >
-                <table cellSpacing="0" cellPadding="0" className="gk-table-body"
-                       style={{width: '100%'}}>
-                  <tbody>
-                  {
-                    this.props.data.map((row, index) => <tr
-                      key={index}
-                      className={classnames({
-                        'gk-table-item': true,
-                        'gk-table-item-active': this.props.$selected[index] !== undefined
-                      })}
-                      onClick={event => this.props.$handleSelect(row, index, event)}
-                      onDoubleClick={event => this.props.$handleDoubleClick(row, index, event)}
-                      onContextMenu={event => this.props.$handleContextMenu(row, index, event)}>
-                      {
-                        children.map((column, idx) => <TableCell onCheck={this.props.$handleCheck}
-                                                                 $isChecked={this.props.$checked[index] !== undefined}
-                                                                 index={index} data={row} column={column}
-                                                                 height={this.props.itemHeight}
-                                                                 key={idx}/>)
-                      }
-                    </tr>)
-                  }
-                  </tbody>
-                </table>
-                {
-                  this.props.more &&
-                  <div className="gk-table-more">
-                    <span className="gk-table-more-text">{this.props.moreText}</span>
-                  </div>
-                }
-              </div>
+                <ScrollLoad onScroll={this.props.$handleLoadMore}>
+                <div className="gk-table-virtual gk-scrollbar"
+                     style={this.props.$style}
+                     onContextMenu={event => this.props.$handleContextMenu(null, null, event)}
+                     onClick={this.props.$handleCancelSelect}
+                >
+                  <table cellSpacing="0" cellPadding="0" className="gk-table-body"
+                         style={{width: '100%'}}>
+                    <tbody>
+                    {
+                      this.props.data.map((row, index) => <tr
+                        key={index}
+                        className={classnames({
+                          'gk-table-item': true,
+                          'gk-table-item-active': this.props.$selected[index] !== undefined
+                        })}
+                        onClick={event => this.props.$handleSelect(row, index, event)}
+                        onDoubleClick={event => this.props.$handleDoubleClick(row, index, event)}
+                        onContextMenu={event => this.props.$handleContextMenu(row, index, event)}>
+                        {
+                          children.map((column, idx) => <TableCell onCheck={this.props.$handleCheck}
+                                                                   $isChecked={this.props.$checked[index] !== undefined}
+                                                                   index={index} data={row} column={column}
+                                                                   height={this.props.itemHeight}
+                                                                   key={idx}/>)
+                        }
+                      </tr>)
+                    }
+                    </tbody>
+                  </table>
+                </div>
+                </ScrollLoad>
               </Loading>
+              {
+                this.props.more &&
+                <div className="gk-table-more">
+                  <span className="gk-table-more-text">{this.props.moreText}</span>
+                </div>
+              }
             </React.Fragment>
           ) : <div className="gk-table-empty" style={this.props.$style}>{this.props.empty}</div>
         }
@@ -154,6 +157,7 @@ Table.propTypes = {
   $handleContextMenu: PropTypes.func,
   $handleDoubleClick: PropTypes.func,
   $handleCancelSelect: PropTypes.func,
+  $handleLoadMore: PropTypes.func,
   fit: PropTypes.bool,
   showCheckbox: PropTypes.bool,
   className: PropTypes.string,

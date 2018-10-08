@@ -39,7 +39,7 @@ export default {
     mock.onGet('/file/listpage').reply(config => {
       let {page, fullpath} = config.params;
       fullpath = fullpath || '';
-      let mockFiles = genFiles(30);
+      let mockFiles = genFiles(50);
       let total = mockFiles.length;
       mockFiles = mockFiles.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
       mockFiles.forEach(file => {

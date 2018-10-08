@@ -24,16 +24,6 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
       };
     }
 
-    loadMore() {
-      if (this.scrollOnCheck) {
-        this.scrollCheckAll = this.getSelectedIndex().length === this.data.length;
-      }
-      if (this.scrollOnSelect) {
-        this.scrollSelectAll = this.getSelectedIndex().length === this.data.length;
-      }
-      this.$emit('load-more');
-    }
-
     updateData(newProps) {
       this.checked = intersect(this.checked, newProps.data);
       this.selected = intersect(this.selected, newProps.data);
@@ -104,6 +94,16 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
       this.setState({
         change: !this.state.change
       });
+    };
+
+    handleLoadMore = () => {
+      if (this.scrollOnCheck) {
+        this.scrollCheckAll = this.getSelectedIndex().length === this.data.length;
+      }
+      if (this.scrollOnSelect) {
+        this.scrollSelectAll = this.getSelectedIndex().length === this.data.length;
+      }
+      this.$emit('loadMore');
     };
 
     handleCheck = (item, index, event) => {
@@ -264,6 +264,7 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
         $handleContextMenu: this.handleContextMenu,
         $handleDoubleClick: this.handleDoubleClick,
         $handleCancelSelect: this.handleCancelSelect,
+        $handleLoadMore: this.handleLoadMore,
         $selected: this.selected,
         $checked: this.checked,
         $style: style

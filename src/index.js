@@ -6,10 +6,10 @@ import GkCheckbox from '../packages/checkbox/index.js';
 import GkDropdown from '../packages/dropdown/index.js';
 import GkFileicon from '../packages/fileicon/index.js';
 import GkFinder from '../packages/finder/index.js';
-// import Loading from '../packages/loading/index.js';
+import GkLoading from '../packages/loading/index.js';
 import GkMenu from '../packages/menu/index.js';
 import GkPermissions from '../packages/permissions/index.js';
-// import ScrollLoad from '../packages/scroll-load/index.js';
+import GkScrollLoad from '../packages/scroll-load/index.js';
 import GkSlide from '../packages/slide/index.js';
 import GkTable from '../packages/table/index.js';
 import GkThumbnail from '../packages/thumbnail/index.js';
@@ -18,19 +18,21 @@ import GkUploader from '../packages/uploader/index.js';
 
 module.exports = {
   version: '1.0.0',
+  GkAdvancedPermissions,
   GkBreadcrumb,
   GkButton,
   GkCheckbox,
   GkDropdown,
   GkFileicon,
   GkFinder,
+  GkLoading,
   GkMenu,
+  GkPermissions,
+  GkScrollLoad,
   GkSlide,
   GkTable,
   GkThumbnail,
   GkTooltip,
-  GkUploader,
-  GkPermissions,
-  GkAdvancedPermissions
+  GkUploader
 };
 module.exports.default = module.exports;

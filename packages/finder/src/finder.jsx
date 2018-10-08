@@ -41,9 +41,8 @@ class Finder extends React.Component {
       onCheckAll: this.handleCheckAllItem,
       onDoubleClick: this.handleDoubleClickItem,
       onContextMenu: this.handleContextMenuItem,
-      onLoadMore: "loadMore",
-      moreText: this.props.moreText,
-      showMore: this.props.showMore
+      onLoadMore: this.handleLoadMore,
+      moreText: this.props.moreText
     };
   }
 
@@ -89,13 +88,6 @@ class Finder extends React.Component {
     this.$emit('command', this.getSelected(), command);
   }
 
-  loadMore() {
-    if (this.list.length === this.total) {
-      return;
-    }
-    this.$emit('loadMore', this.value);
-  }
-
   openFile(file) {
     this.setState({
       previewFile: file,
@@ -132,6 +124,13 @@ class Finder extends React.Component {
   getSelected() {
     return this.table.getSelected();
   }
+
+  handleLoadMore = () => {
+    if (this.props.list.length === this.props.total) {
+      return;
+    }
+    this.$emit('loadMore', this.props.current);
+  };
 
   handleSelectItem = (files, event) => {
     this.$emit('select', files, event);
@@ -204,7 +203,7 @@ class Finder extends React.Component {
 
   renderListGrid() {
     return <Thumbnail {...this.publicProps} border={0} checkbox={this.props.checkbox} data={this.props.list}
-                      defaultIndex={this.state.selectedIndex} loading={this.props.loading}
+                      defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}
                       render={(file) =>
                         <React.Fragment>
                           <p><Fileicon thumbnail={file.thumbnail} filename={file.filename} size="128"
@@ -216,7 +215,7 @@ class Finder extends React.Component {
 
   renderList() {
     return <Table {...this.publicProps} header data={this.props.list} itemHeight={this.props.itemHeight}
-                  defaultIndex={this.state.selectedIndex} loading={this.props.loading}>
+                  defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}>
       <Table.Column checkbox={this.props.checkbox} width={25} align="center"/>
       <Table.Column property="filename" label={this.gettext('filename')} render={(file) =>
         <div className="gk-finder-filename-column">
@@ -233,7 +232,7 @@ class Finder extends React.Component {
 
   renderListDetail() {
     return <Table {...this.publicProps} data={this.props.list} itemHeight={this.props.itemHeight + 20}
-                  defaultIndex={this.state.selectedIndex} loading={this.props.loading}>
+                  defaultIndex={this.state.selectedIndex} loading={this.props.loading} more={this.props.more}>
       <Table.Column width={25} checkbox={this.props.checkbox} align="center"/>
       <Table.Column property="filename" label="gettext('filename')" render={(file) =>
         <div className="gk-finder-filename-column">
@@ -325,7 +324,7 @@ Finder.propTypes = {
   itemHeight: PropTypes.number,
   sortList: PropTypes.array,
   defaultSort: PropTypes.string,
-  showMore: PropTypes.bool,
+  more: PropTypes.bool,
   moreText: PropTypes.string,
   checkbox: PropTypes.bool,
   total: PropTypes.number,

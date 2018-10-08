@@ -74,16 +74,18 @@ class Finder extends React.Component {
       return;
     }
     let para = {
-      page: ++this.page,
+      page: this.state.page + 1,
       fullpath: file.fullpath
     };
     this.setState({
-      loading: true
+      locked: true
     });
     getFileList(para).then(data => {
       this.setState({
         fileList: this.state.fileList.concat(data.list),
-        loading: false
+        locked: false,
+        total: data.total,
+        page: para.page
       });
     });
   };
@@ -129,7 +131,7 @@ class Finder extends React.Component {
                   defaultSort={this.sort}
                   sortList={this.sortList}
                   onLoadMore={this.handleLoadMore}
-                  showMore={this.state.locked}
+                  more={this.state.locked}
                   moreText={this.moreText}
                   current={this.state.file}
                   onEnter={this.handleEnter}

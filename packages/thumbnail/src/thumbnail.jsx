@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import tableMixin from '../../table/src/table-mixin';
 import ThumbnailItem from './thumbnail-item';
 import Loading from '../../loading';
+import ScrollLoad from "../../scroll-load/src/scroll-load";
 
 class Thumbnail extends React.Component {
   render() {
@@ -14,31 +15,46 @@ class Thumbnail extends React.Component {
       'gk-thumbnail-fit': this.props.fit,
       'gk-thumbnail-checkbox': this.props.showCheckbox
     });
-    return (
-      <Loading loading={this.props.loading}>
-        <ul ref={(thumbnail) => this.thumbnail = thumbnail}
-            style={this.props.$style}
-            className={classList}
-            onClick={this.props.$handleCancelSelect}
-            onContextMenu={event => this.props.$handleContextMenu(null, null, event)}>
-          {this.props.data && this.props.data.map((row, index) => <ThumbnailItem
-            onClick={event => this.props.$handleSelect(row, index, event)}
-            onDoubleClick={event => this.props.$handleDoubleClick(row, index, event)}
-            onContextMenu={event => this.props.$handleContextMenu(row, index, event)}
-            onCheck={event => this.props.$handleCheck(row, index, event)}
-            key={index}
-            data={row}
-            checkbox={this.props.checkbox}
-            render={this.props.render}
-            property={this.props.property}
-            size={this.props.size}
-            isChecked={this.props.$checked[index] !== undefined}
-            className={classnames({'gk-thumbnail-active-item': this.props.$selected[index] !== undefined})}
-            style={{border: this.props.border + 'px'}}
-          /> || this.props.children)}
-        </ul>
-      </Loading>
-    )
+    if (this.props.data.length) {
+
+      return (
+        <React.Fragment>
+          <Loading loading={this.props.loading}>
+            <ScrollLoad onScroll={this.props.$handleLoadMore}>
+              <ul ref={(thumbnail) => this.thumbnail = thumbnail}
+                  style={this.props.$style}
+                  className={classList}
+                  onClick={this.props.$handleCancelSelect}
+                  onContextMenu={event => this.props.$handleContextMenu(null, null, event)}>
+                {this.props.data && this.props.data.map((row, index) => <ThumbnailItem
+                  onClick={event => this.props.$handleSelect(row, index, event)}
+                  onDoubleClick={event => this.props.$handleDoubleClick(row, index, event)}
+                  onContextMenu={event => this.props.$handleContextMenu(row, index, event)}
+                  onCheck={event => this.props.$handleCheck(row, index, event)}
+                  key={index}
+                  data={row}
+                  checkbox={this.props.checkbox}
+                  render={this.props.render}
+                  property={this.props.property}
+                  size={this.props.size}
+                  isChecked={this.props.$checked[index] !== undefined}
+                  className={classnames({'gk-thumbnail-active-item': this.props.$selected[index] !== undefined})}
+                  style={{border: this.props.border + 'px'}}
+                /> || this.props.children)}
+              </ul>
+            </ScrollLoad>
+          </Loading>
+          {
+            this.props.more &&
+            <div className="gk-thumbnail-more">
+              <span className="gk-thumbnail-more-text">{this.props.moreText}</span>
+            </div>
+          }
+        </React.Fragment>
+      )
+    } else {
+      return (<div className="gk-thumbnail-empty" style={this.props.$style}>{this.props.empty}</div>);
+    }
   }
 }
 
@@ -48,6 +64,7 @@ Thumbnail.propTypes = {
   $handleContextMenu: PropTypes.func,
   $handleDoubleClick: PropTypes.func,
   $handleCancelSelect: PropTypes.func,
+  $handleLoadMore: PropTypes.func,
   $checked: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
@@ -56,6 +73,9 @@ Thumbnail.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
+  more: PropTypes.bool,
+  moreText: PropTypes.string,
+  empty: PropTypes.object,
   $style: PropTypes.object,
   size: PropTypes.object,
   property: PropTypes.string,
