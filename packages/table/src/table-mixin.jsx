@@ -34,31 +34,6 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
       this.$emit('load-more');
     }
 
-    updateChecked() {
-      if (this.props.selectOnCheck) {
-        this.checked = Object.assign({}, this.selected);
-        this.$emit('check', this.getChecked(), event);
-      }
-
-      this.inset = true;
-      this.setState({
-        change: !this.state.change
-      });
-    }
-
-    updateSelected(index) {
-      if (this.props.checkOnSelect) {
-        this.selected = Object.assign({}, this.checked);
-        this.lastIndex = index;
-        this.$emit('select', this.getSelected(), event);
-      }
-
-      this.inset = true;
-      this.setState({
-        change: !this.state.change
-      });
-    }
-
     updateData(newProps) {
       this.checked = intersect(this.checked, newProps.data);
       this.selected = intersect(this.selected, newProps.data);
@@ -107,6 +82,29 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
       args = args.slice(1);
       typeof this.props[funcName] === 'function' && this.props[funcName](...args);
     }
+
+    updateChecked = () => {
+      if (this.props.selectOnCheck) {
+        this.checked = Object.assign({}, this.selected);
+        this.$emit('check', this.getChecked(), event);
+      }
+
+      this.setState({
+        change: !this.state.change
+      });
+    };
+
+    updateSelected = (index) => {
+      if (this.props.checkOnSelect) {
+        this.selected = Object.assign({}, this.checked);
+        this.lastIndex = index;
+        this.$emit('select', this.getSelected(), event);
+      }
+
+      this.setState({
+        change: !this.state.change
+      });
+    };
 
     handleCheck = (item, index, event) => {
       if (event.target.checked) {
@@ -247,10 +245,8 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
       this.props.shortcut && document.removeEventListener('keydown', this.handleDocumentKeyDown);
     }
 
-    shouldComponentUpdate(newProps) {
-      if (this.inset) {
-        this.inset = false;
-      } else {
+    shouldComponentUpdate(newProps, newState) {
+      if (newState.change === this.state.change) {
         this.updateData(newProps);
       }
       return true;

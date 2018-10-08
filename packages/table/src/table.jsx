@@ -11,16 +11,18 @@ class Table extends React.Component {
     this.state = {
       scrollbar: false,
       property: ''
-    }
+    };
   }
 
   setScrollbar() {
-    if (!this.props.header) {
+    if (!this.props.header || !table) {
       return false;
     }
     this.inset = true;
+    const table = document.querySelector('.gk-table-virtual');
+    const height = table ? table.clientHeight : this.props.height;
     this.setState({
-      scrollbar: this.props.itemHeight * this.props.data.length > this.table.clientHeight
+      scrollbar: this.props.itemHeight * this.props.data.length > height
     });
   }
 
@@ -93,7 +95,6 @@ class Table extends React.Component {
 
               <Loading loading={this.props.loading}>
               <div className="gk-table-virtual gk-scrollbar"
-                   ref={(table) => this.table = table}
                    style={this.props.$style}
                    onContextMenu={event => this.props.$handleContextMenu(null, null, event)}
                    onClick={this.props.$handleCancelSelect}
