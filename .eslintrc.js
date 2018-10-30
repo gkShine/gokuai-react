@@ -4,6 +4,11 @@ module.exports = {
     browser: true,
     node: true
   },
+  settings: {
+    react: {
+      version: '16.6.0'
+    }
+  },
   parser: 'babel-eslint',
   parserOptions: {
     "ecmaVersion": 7,
