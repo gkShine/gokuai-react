@@ -48,6 +48,10 @@ class Tooltip extends React.Component {
   handleMouseOut = () => {
     this.visible = false;
     this.tooltip.style.opacity = '0.01';
+
+    if (!("AnimationEvent" in window)) {
+        this.tooltip.style.display = 'none'
+    }
   };
 
   componentDidMount() {

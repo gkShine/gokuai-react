@@ -19,13 +19,15 @@ class UploaderButtons extends React.Component {
         type: 'file',
         class: 'gk-uploader-file',
         label: this.gettext('upload file')
-      },
-      folder: {
-        type: 'folder',
-        class: 'gk-uploader-folder',
-        label: this.gettext('upload folder')
       }
     };
+    if (!isIE()) {
+        this.defaultButtons['folder'] = {
+            type: 'folder',
+            class: 'gk-uploader-folder',
+            label: this.gettext('upload folder')
+        }
+    }
   }
 
   getList() {

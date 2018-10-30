@@ -1,16 +1,13 @@
 {
-  "presets": ["env", "react"],
-  "plugins": ["transform-class-properties"],
-  "env": {
-    "utils": {
-      "plugins": [
-        ["module-resolver", {
-          "root": ["gokuai-components"],
-          "alias": {
-            "gokuai-components/src": "gokuai-components/lib"
-          }
-        }]
-      ]
+  "presets": ["@babel/preset-react", ["@babel/preset-env", {
+    "targets": {
+      "browsers": ["last 2 versions", "ie >= 9"]
     }
-  }
+  }]],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }

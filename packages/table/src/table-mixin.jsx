@@ -212,14 +212,14 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
     };
 
     handleDocumentKeyDown = (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.code === 'KeyA') {
+        if ((event.ctrlKey || event.metaKey) && event.keyCode === 65) { //ctrl+a || meta+a
         this.handleSelectAll();
         event.preventDefault();
         return false;
-      } else if (event.code === 'PgUp') {
+      } else if (event.keyCode === 33) { //PgUp
         this.handleSelect(this.data[0], 0, event);
         event.preventDefault();
-      } else if (event.code === 'End' || event.code === 'PgDn') {
+      } else if (event.keyCode === 35 || event.keyCode === 34) { //End || PgDn
         this.handleSelect(this.data[this.data.length - 1], this.props.data.length - 1, event);
         event.preventDefault();
       }
@@ -228,8 +228,8 @@ export default function tableMixin(WrappedComponent, handleShortcut) {
         return false;
       }
 
-      if (event.code === 'Enter') {
-        this.handleDblclick(Object.values(this.selected)[0], Object.keys(this.selected)[0], event);
+      if (event.keyCode === 13) { //enter
+        this.handleDoubleClick(Object.values(this.selected)[0], Object.keys(this.selected)[0], event);
         event.preventDefault();
         return;
       }

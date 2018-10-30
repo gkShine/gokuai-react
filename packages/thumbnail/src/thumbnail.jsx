@@ -100,16 +100,16 @@ Thumbnail.defaultProps = {
 };
 
 export default tableMixin(Thumbnail, (mixin, event) => {
-  if (event.code === 'ArrowLeft') {
+  if (event.keyCode === 37) { //arrow left
     mixin.handleSelectTo(-1, event);
     event.preventDefault();
-  } else if (event.code === 'ArrowRight') {
+  } else if (event.keyCode === 39) { //arrow right
     mixin.handleSelectTo(+1, event);
     event.preventDefault();
-  } else if (event.code === 'ArrowUp') {
+  } else if (event.keyCode === 38) { //arrow up
     mixin.handleSelectTo(-mixin.getLineSize(), event);
     event.preventDefault();
-  } else if (event.code === 'ArrowDown') {
+  } else if (event.keyCode === 40) { //arrow down
     mixin.handleSelectTo(+mixin.getLineSize(), event);
     event.preventDefault();
   }

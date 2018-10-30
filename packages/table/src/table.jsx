@@ -184,10 +184,10 @@ Table.defaultProps = {
 };
 
 export default tableMixin(Table, (mixin, event) => {
-  if (event.code === 'ArrowUp') {
+  if (event.keyCode === 38) { //arrow up
     mixin.handleSelectTo(-1, event);
     event.preventDefault();
-  } else if (event.code === 'ArrowDown') {
+  } else if (event.keyCode === 40) { //arrow down
     mixin.handleSelectTo(+1, event);
     event.preventDefault();
   }

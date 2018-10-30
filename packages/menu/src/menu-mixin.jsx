@@ -1,3 +1,4 @@
+import "mdn-polyfills/Node.prototype.remove";
 import React from 'react';
 import ReactDom from "react-dom";
 import MenuItem from './menu-item.jsx';

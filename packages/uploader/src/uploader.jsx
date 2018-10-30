@@ -1,3 +1,4 @@
+import "mdn-polyfills/NodeList.prototype.forEach";
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -153,9 +154,10 @@ class Uploader extends React.Component {
   }
 
   webUpload = (picker) => {
-    document.querySelector(picker.id).addEventListener('mouseenter', () => {
-      this.uploader.refresh();
-    });
+      let button = document.querySelector(picker.id);
+      button && button.addEventListener('mouseenter', () => {
+          this.uploader.refresh();
+      });
     if (this.uploader !== undefined) {
       this.uploader.addButton(picker);
       return this.uploader;

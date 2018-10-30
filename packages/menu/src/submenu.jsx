@@ -24,6 +24,9 @@ class Submenu extends React.Component {
 
   hideMenu() {
     this.menu.style.opacity = '0.01';
+    if (!("AnimationEvent" in window)) {
+        this.menu.style.display = 'none';
+    }
   }
 
   setPosition() {

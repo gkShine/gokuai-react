@@ -84,10 +84,10 @@ class Slide extends React.Component {
   };
 
   handleDocumentKeydown = (event) => {
-    if (event.code === 'ArrowLeft') {
+    if (event.keyCode === 37) { //arrow left
       this.handlePrev();
       event.preventDefault();
-    } else if (event.code === 'ArrowRight') {
+    } else if (event.keyCode === 39) { //arrow right
       this.handleNext();
       event.preventDefault();
     }
