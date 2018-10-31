@@ -11,6 +11,7 @@ class Menu extends React.Component {
   }
 
   showMenu() {
+    this.visible = true;
     if (this.menu.parentNode.nodeName !== 'BODY') {
       document.body.appendChild(this.menu);
     }
@@ -23,6 +24,7 @@ class Menu extends React.Component {
   }
 
   hideMenu() {
+    this.visible = false;
     this.menu.style.opacity = '0.01';
     if (!("AnimationEvent" in window)) {
         this.menu.style.display = 'none';
@@ -123,9 +125,9 @@ class Menu extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.visible) {
+    if (this.props.visible && !this.visible) {
       this.showMenu();
-    } else {
+    } else if (this.visible) {
       this.hideMenu();
     }
   }

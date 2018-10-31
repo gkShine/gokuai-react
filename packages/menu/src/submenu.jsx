@@ -15,6 +15,7 @@ class Submenu extends React.Component {
   }
 
   showMenu() {
+    this.visible = true;
     this.menu.style.display = 'block';
     this.setPosition();
     window.requestAnimationFrame(() => {
@@ -23,6 +24,7 @@ class Submenu extends React.Component {
   }
 
   hideMenu() {
+    this.visible = false;
     this.menu.style.opacity = '0.01';
     if (!("AnimationEvent" in window)) {
         this.menu.style.display = 'none';
@@ -52,9 +54,9 @@ class Submenu extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.visible) {
+    if (this.props.visible && !this.visible) {
       this.showMenu();
-    } else {
+    } else if (this.visible) {
       this.hideMenu();
     }
   }
