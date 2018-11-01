@@ -16,7 +16,7 @@ class Table extends React.Component {
   }
 
   setScrollbar() {
-    const table = document.querySelector('.gk-table-virtual');
+    const table = document.querySelector('.gk-table-body');
     if (!this.props.header || !table) {
       return false;
     }
@@ -96,13 +96,12 @@ class Table extends React.Component {
 
               <Loading loading={this.props.loading}>
                 <ScrollLoad onScroll={this.props.$handleLoadMore}>
-                <div className="gk-table-virtual gk-scrollbar"
+                <div className="gk-table-body gk-scrollbar"
                      style={this.props.$style}
                      onContextMenu={event => this.props.$handleContextMenu(null, null, event)}
                      onClick={this.props.$handleCancelSelect}
                 >
-                  <table cellSpacing="0" cellPadding="0" className="gk-table-body"
-                         style={{width: '100%'}}>
+                  <table>
                     <tbody>
                     {
                       this.props.data.map((row, index) => <tr
