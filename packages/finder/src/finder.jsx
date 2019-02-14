@@ -346,7 +346,8 @@ Finder.propTypes = {
   onSort: PropTypes.func,
   onEnter: PropTypes.func,
   onNavigator: PropTypes.func,
-  onLoadMore: PropTypes.func
+  onLoadMore: PropTypes.func,
+  children: PropTypes.any
 };
 
 Finder.defaultProps = {

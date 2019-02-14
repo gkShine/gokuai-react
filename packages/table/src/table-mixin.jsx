@@ -4,6 +4,14 @@ import {intersect, getSelected} from "gokuai-components/src/common/util";
 
 export default function tableMixin(WrappedComponent, handleShortcut) {
   class Mixin extends React.Component {
+    propTypes = {
+      data: PropTypes.array,
+      height: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+      ])
+    };
+
     constructor(props) {
       super(props);
 

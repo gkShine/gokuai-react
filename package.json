@@ -10,11 +10,13 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.config.js",
+    "build:demo": "npm run clean:demo && webpack --config build/webpack.demo.config.js",
     "build:file": "node build/bin/gen-components.js && node build/bin/build-entry.js",
     "build:main": "webpack --config build/webpack.config.js",
     "build:component": "webpack --config build/webpack.component.config.js",
     "build": "npm run clean && npm run build:file && npm run build:main && npm run build:component",
-    "clean": "rimraf lib && rimraf packages/*/lib"
+    "clean": "rimraf lib && rimraf packages/*/lib",
+    "clean:demo": "rimraf demo"
   },
   "dependencies": {
     "classnames": "^2.2.6",

@@ -3,10 +3,19 @@ import React from 'react';
 import ReactDom from "react-dom";
 import MenuItem from './menu-item.jsx';
 import Submenu from './submenu.jsx';
+import PropTypes from "prop-types";
 
 export default function menuMixin(WrappedComponent, defaultTrigger) {
   // eslint-disable-next-line
   return class extends React.Component {
+    propTypes = {
+      command: PropTypes.func,
+      data: PropTypes.array,
+      target: PropTypes.object,
+      trigger: PropTypes.string,
+      children: PropTypes.any
+    };
+
     constructor(props) {
       super(props);
       this.dom = null;
